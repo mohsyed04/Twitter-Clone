@@ -45,33 +45,3 @@ class Followers(db.Model):
            
     def __repr__(self):
         pass
-
-
-#https://stackoverflow.com/questions/7150306/help-with-a-microblog-twitter-clone-database-structure
-'''
-CREATE TABLE followers (
-  id_user INT NOT NULL REFERENCES users (user_id),
-  id_following INT NOT NULL REFERENCES users (user_id),
-  PRIMARY KEY (id_user, id_following)
-) 
-'''
-'''
-CREATE TABLE tweets (
-  tweet_id INT NOT NULL AUTO_INCREMENT,
-  user_id INT NOT NULL
-  tweet VARCHAR(140) NOT NULL,
-  PRIMARY KEY (tweet_id),
-  FOREIGN KEY user_id(user_id) REFERENCES users(user_id) 
-  ON UPDATE CASCADE ON DELETE CASCADE
-) 
-'''
-'''
-CREATE TABLE users (
-  user_id INT NOT NULL AUTO_INCREMENT,
-  user VARCHAR(255) NOT NULL,
-  /*password VARCHAR(40) NOT NULL,*/<<--- NEVER STORE A PASSWORD IN THE CLEAR!
-  passhash VARCHAR(40) NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  PRIMARY KEY (user_id)
-) 
-'''
