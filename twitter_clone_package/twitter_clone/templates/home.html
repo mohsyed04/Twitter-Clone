@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+{% block content %}
+  {% if following_list %}
+      {% for tweet in tweets %}
+          <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + tweet.author.image_file) }}">
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="mr-2" href="#">{{ tweet.author.username }}</a>
+                <small class="text-muted">{{ tweet.date_tweeted.strftime('%Y-%m-%d') }}</small>
+              </div>
+              <p class="article-content">{{ tweet.tweet }}</p>
+            </div>
+          </article>
+      {% endfor %}
+  {% else %}
+    <div class="alert alert-warning" role="alert">
+      You are not following anyone!
+    </div>
+  {% endif %}
+{% endblock content %}

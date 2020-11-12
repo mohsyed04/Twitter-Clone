@@ -1,0 +1,76 @@
+{% extends "main.html" %}
+{% block content %}
+<!-- FIX  author.username when there are no tweets to display-->
+    {%if following%}
+        {%if tweets%}
+        <div class="jumbotron site-header">
+            <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + tweets[0].author.image_file) }}">
+            <div class="row">
+                <div class="column username"> 
+                    <h1 style="font-family: Gill Sans"> <b> {{ tweets[0].author.username }} </b> </h1>
+                </div>
+                <div class="column follow-div">
+                    <a role = "button" class="btn btn-default" href="{{ url_for('unfollow', unfollow_id=tweets[0].author.user_id) }}">Following</a>
+                </div>  
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="container-fluid">
+            <h3>Tweets</h3>
+                {% for t in tweets %}
+                    <article class="media content-section">
+                        <div class="media-body">
+                            <div class="row">
+                                <p class="article-content">{{ t.tweet }}</p>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+
+        {%else%}
+        <div class="content-section">
+            <h5>This user has no tweets to display</h5>
+        </div>
+        {% endif %}
+    <!--       IF NOT FOLLOWING               -->
+    {%else%}
+        {%if tweets%}
+        <div class="jumbotron site-header">
+            <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + tweets[0].author.image_file) }}">
+            <div class="row">
+                <div class="column username"> 
+                    <h1 style="font-family: Gill Sans"> <b> {{ tweets[0].author.username }} </b> </h1>
+                </div>
+                <div class="column follow-div">
+                    <a role = "button" class="btn btn-primary" href="{{ url_for('follow', follow_id=tweets[0].author.user_id) }}">Follow</a>
+                </div>  
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="container-fluid">
+            <h3>Tweets</h3>
+                {% for t in tweets %}
+                    <article class="media content-section">
+                        <div class="media-body">
+                            <div class="row">
+                                <p class="article-content">{{ t.tweet }}</p>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+
+        {%else%}
+        <div class="content-section">
+            <h5>This user has no tweets to display</h5>
+        </div>
+        {% endif %}  
+
+    {% endif %}   
+    
+{% endblock content %}
